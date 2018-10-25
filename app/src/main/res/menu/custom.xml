@@ -12,7 +12,10 @@
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction"
         />
-    <group android:id="@+id/overflow">
+    <group
+        android:id="@+id/overflow"
+        android:visible="false"
+        >
         <item
             android:id="@+id/action_share"
             android:orderInCategory="100"

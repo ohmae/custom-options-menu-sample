@@ -24,7 +24,7 @@ class CustomMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_menu)
         setSupportActionBar(toolbar)
-        optionsMenu = CustomOptionsMenuHelper(this, R.id.toolbar)
+        optionsMenu = CustomOptionsMenuHelper(this, R.id.toolbar, R.id.action_overflow)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
