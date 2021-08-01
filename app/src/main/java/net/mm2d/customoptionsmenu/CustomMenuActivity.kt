@@ -12,7 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_custom_menu.*
+import net.mm2d.customoptionsmenu.databinding.ActivityCustomMenuBinding
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -22,8 +22,9 @@ class CustomMenuActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_custom_menu)
-        setSupportActionBar(toolbar)
+        val binding = ActivityCustomMenuBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         optionsMenu = CustomOptionsMenuHelper(this, R.id.toolbar, R.id.action_overflow)
     }
 

@@ -19,6 +19,7 @@ import androidx.appcompat.widget.ListPopupWindow
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.forEach
 import java.lang.ref.WeakReference
+import kotlin.math.roundToInt
 
 /**
  * @author [大前良介 (OHMAE Ryosuke)](mailto:ryo@mm2d.net)
@@ -27,16 +28,18 @@ class CustomOptionsMenuHelper(activity: Activity, toolbarId: Int, private val ov
     private val activityReference = WeakReference(activity)
     private val toolbar = activity.findViewById<Toolbar>(toolbarId)
     private val adapter = ArrayAdapter<MenuItem>(activity, android.R.layout.simple_list_item_1)
-    private val margin = Math.round(MARGIN * activity.resources.displayMetrics.density)
+    private val margin = (MARGIN * activity.resources.displayMetrics.density).roundToInt()
     private val popup = ListPopupWindow(activity).also {
-        it.width = Math.round(WIDTH * activity.resources.displayMetrics.density)
+        it.width = (WIDTH * activity.resources.displayMetrics.density).roundToInt()
         it.setDropDownGravity(Gravity.END)
         it.setPromptView(activity.layoutInflater.inflate(R.layout.layout_credit, toolbar, false))
         it.promptPosition = ListPopupWindow.POSITION_PROMPT_BELOW
         it.inputMethodMode = PopupWindow.INPUT_METHOD_NOT_NEEDED
         it.setAdapter(adapter)
         it.setOnItemClickListener { _, _, position, _ ->
-            activity.onOptionsItemSelected(adapter.getItem(position))
+            adapter.getItem(position)?.let {
+                activity.onOptionsItemSelected(it)
+            }
             it.dismiss()
         }
     }
@@ -69,6 +72,7 @@ class CustomOptionsMenuHelper(activity: Activity, toolbarId: Int, private val ov
     companion object {
         @Dimension(unit = Dimension.DP)
         private const val MARGIN = 4
+
         @Dimension(unit = Dimension.DP)
         private const val WIDTH = 200
     }
